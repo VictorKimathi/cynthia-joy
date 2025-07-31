@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import Button from './Button';
-const ContactForm = () => {
+export function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
       name,
       value
@@ -22,72 +18,43 @@ const ContactForm = () => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate form submission
+    // In a real implementation, you'd send the form data to a backend
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+    // Reset the success message after 5 seconds
     setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    }, 1500);
+      setIsSubmitted(false);
+    }, 5000);
   };
-  if (submitSuccess) {
-    return <div className="bg-green-50 border border-green-100 rounded p-6 text-center">
-        <h3 className="text-xl font-bold text-green-700 mb-2">Message Sent!</h3>
-        <p className="text-green-600 mb-4">
-          Thank you for reaching out. I'll respond to your inquiry as soon as
-          possible.
-        </p>
-        <Button variant="outline" onClick={() => setSubmitSuccess(false)}>
-          Send Another Message
-        </Button>
-      </div>;
-  }
   return <form onSubmit={handleSubmit} className="space-y-6">
+      {isSubmitted && <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded">
+          Thank you for your message! I'll get back to you soon.
+        </div>}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-          Your Name
+        <label htmlFor="name" className="block mb-2 font-medium">
+          Name
         </label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#0033CC]" />
       </div>
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-          Email Address
+        <label htmlFor="email" className="block mb-2 font-medium">
+          Email
         </label>
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#0033CC]" />
       </div>
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-          Subject
-        </label>
-        <select id="subject" name="subject" value={formData.subject} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-          <option value="">Select a subject</option>
-          <option value="Project Inquiry">Project Inquiry</option>
-          <option value="Collaboration Opportunity">
-            Collaboration Opportunity
-          </option>
-          <option value="Consultation Request">Consultation Request</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="message" className="block mb-2 font-medium">
           Message
         </label>
-        <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={6} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={5} className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#0033CC]"></textarea>
       </div>
-      <div>
-        <Button type="submit" variant="primary" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
-          {isSubmitting ? 'Sending...' : 'Send Message'}
-        </Button>
-      </div>
-      {submitError && <div className="text-red-600 text-sm">
-          There was an error sending your message. Please try again.
-        </div>}
+      <button type="submit" className="bg-[#0033CC] text-white px-6 py-3 rounded hover:bg-[#002299] transition-colors">
+        Send Message
+      </button>
     </form>;
-};
-export default ContactForm;
+}

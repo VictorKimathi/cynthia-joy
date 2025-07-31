@@ -1,113 +1,67 @@
 import React from 'react';
-import ExperienceItem from '../components/ExperienceItem';
-import Button from '../components/Button';
-import { aboutData } from '../utils/portfolioData';
-
-const About: React.FC = () => {
-  const {
-    hero,
-    professionalSummary,
-    workHistory,
-    education,
-    skills,
-    cta,
-    profilePicture // 👈 New field added
-  } = aboutData;
-
-  return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <section className="bg-black text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-6">{hero.title}</h1>
-            <p className="text-xl text-gray-300">{hero.subtitle}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Profile Picture Section */}
-      <section className="bg-white py-12">
-        <div className="container mx-auto px-4 flex justify-center">
-          <div className="rounded-full overflow-hidden shadow-lg w-48 h-48 md:w-56 md:h-56">
-            <img
-              src={profilePicture}
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Summary Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {professionalSummary.map((para, index) => (
-              <p key={index} className="text-gray-700 text-lg mb-4">{para}</p>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Work History Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-10">Work History</h2>
-            {workHistory.map((job, index) => (
-              <ExperienceItem
-                key={index}
-                role={job.role}
-                company={job.company}
-                period={job.period}
-                location={job.location}
-                achievements={job.achievements}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Education & Skills Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold mb-4">Education</h2>
-              <h3 className="text-xl font-semibold">{education.institution}</h3>
-              <p className="text-blue-600">{education.degree} – Class of {education.graduated}</p>
+import { CTABanner } from '../components/CTABanner';
+export function About() {
+  return <div className="bg-white">
+      <section className="py-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl font-semibold mb-8 text-center">About Me</h1>
+          <div className="flex flex-col md:flex-row gap-8 items-center mb-12">
+            <div className="md:w-1/3">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="Cynthia Joy, Junior Psychologist" className="rounded-lg shadow-md w-full" />
             </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Skills</h2>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {skills.map((skill, index) => (
-                  <li key={index} className="flex items-center bg-gray-100 p-3 rounded">
-                    <span className="w-3 h-3 bg-blue-600 rounded-full mr-2"></span>
-                    <span>{skill}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="md:w-2/3">
+              <h2 className="text-2xl font-medium mb-4">Cynthia Joy</h2>
+              <p className="text-gray-700 mb-3 leading-relaxed">
+                Junior Psychologist | Psychology Student at Egerton University
+              </p>
+              <p className="text-gray-600 italic mb-4">
+                "Committed to fostering mental wellness and human connection
+                through evidence-based psychology."
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-blue-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">{cta.title}</h2>
-            <p className="text-lg mb-8">{cta.description}</p>
-            <Button to={cta.buttonLink} variant="secondary" size="lg">
-              {cta.buttonText}
-            </Button>
+          <div className="space-y-6">
+            <p className="leading-relaxed">
+              I am a passionate psychology student at Egerton University,
+              dedicated to understanding the human mind and helping others
+              navigate their mental health journeys. My academic and
+              professional focus lies at the intersection of child psychology,
+              community mental health, and cognitive development.
+            </p>
+            <p className="leading-relaxed">
+              Throughout my academic journey, I have developed a deep
+              appreciation for how psychological principles can be applied to
+              real-world challenges. As a peer mentor in our campus Mental
+              Wellness Group, I've had the privilege of supporting fellow
+              students through difficult transitions and stressful periods,
+              reinforcing my belief in the power of empathetic listening and
+              evidence-based interventions.
+            </p>
+            <p className="leading-relaxed">
+              My volunteer work with Sunrise Community Outreach has allowed me
+              to extend psychological support beyond the university setting,
+              working with underserved communities to promote mental health
+              awareness and reduce stigma. These experiences have shaped my
+              approach to psychology as both a science and a healing practice.
+            </p>
+            <p className="leading-relaxed">
+              I am particularly interested in how early psychological
+              interventions can create lasting positive outcomes for children
+              and families. My research focuses on stress management techniques
+              for academic settings, and I hope to contribute meaningful
+              insights to this field through rigorous study and compassionate
+              application.
+            </p>
+            <p className="leading-relaxed">
+              When I'm not studying or volunteering, you can find me exploring
+              nature trails, practicing mindfulness meditation, or engaging with
+              the latest psychological research. I believe in continuous
+              learning and personal growth as fundamental aspects of both
+              professional development and mental wellness.
+            </p>
           </div>
         </div>
       </section>
-    </div>
-  );
-};
-
-export default About;
+      <CTABanner title="Connect With Me" description="Interested in discussing psychology, mental health initiatives, or potential collaborations? I'd love to hear from you." />
+    </div>;
+}
